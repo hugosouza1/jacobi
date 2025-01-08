@@ -33,7 +33,7 @@ program jacobi
 
     do i = 1, n, 1
         write(*, '(A, I1, A, F11.8)') "x[", i, "]:", x(i)
-        write(*, '(A, F10.8, A)') "[", x(i),"]"
+        ! write(*, '(A, F10.8, A)') "[", x(i),"]"
     end do 
 
 
