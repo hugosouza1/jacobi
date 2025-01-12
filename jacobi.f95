@@ -18,7 +18,7 @@ program jacobi
 
     ! Inicializar vetor b
     allocate(b(n))
-    b = [10.0d0, 20.0d0, 20.0d0, 40.0d0, 50.0d0, 60.0d0]
+    b = [3.0d0, 13.0d0, 29.0d0, 31.0d0, 43.0d0, 59.0d0]
 
     ! Inicializar vetor x
     allocate(x(n))
@@ -28,15 +28,12 @@ program jacobi
     call matriz_diagonal_dominante(n, A)
 
     ! Resolver o sistema
-    ! Subrotina 
     call resolucao(n, A, b, x)
 
     do i = 1, n, 1
+        ! Imprimindo resultado
         write(*, '(A, I1, A, F11.8)') "x[", i, "]:", x(i)
-        ! write(*, '(A, F10.8, A)') "[", x(i),"]"
     end do 
-
-
 end program jacobi
 
 subroutine resolucao(n, A, b, x)
