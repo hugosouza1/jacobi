@@ -34,6 +34,7 @@ program jacobi
         ! Imprimindo resultado
         write(*, '(A, I1, A, F11.8)') "x[", i, "]:", x(i)
     end do 
+    deallocate(A,b,x)
 end program jacobi
 
 subroutine resolucao(n, A, b, x)
@@ -51,15 +52,8 @@ subroutine resolucao(n, A, b, x)
     iteracoes = 0
 
     do
-        ! Condição: menor que o erro definido ou numero maximo de iterações 
-        cond_parada = condicao_parada(n, x, x_old)
-        if ((cond_parada == 1) .or. (iteracoes >= MAX_ITER)) then
-            exit ! Encerra o loop (break;)
-        end if
-
         iteracoes = iteracoes + 1
         x_old = x
-
         do i = 1, n
             x(i) = b(i)
             do j = 1, n
@@ -69,6 +63,12 @@ subroutine resolucao(n, A, b, x)
             end do
             x(i) = x(i) / A(i, i)
         end do
+
+        ! Condição: menor que o erro definido ou numero maximo de iterações 
+        cond_parada = condicao_parada(n, x, x_old)
+        if ((cond_parada == 1) .or. (iteracoes >= MAX_ITER)) then
+            exit ! Encerra o loop (break;)
+        end if
     end do
 end subroutine resolucao
 
